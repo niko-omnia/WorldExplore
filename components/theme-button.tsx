@@ -9,12 +9,16 @@ interface ThemeButtonType {
   styles: any,
   id: string,
   selectedTheme: string,
+  setSelectedTheme: (id: string) => void,
 };
 
-export function ThemeButton({ text, theme, styles, id, selectedTheme }: ThemeButtonType) {
+export function ThemeButton({ text, theme, styles, id, selectedTheme, setSelectedTheme }: ThemeButtonType) {
   return (
     <Pressable
-      onPress={() => setTheme(id)}
+      onPress={() => {
+        setTheme(id);
+        setSelectedTheme(id);
+      }}
       style={({ pressed }) => [
         styles.button,
         {

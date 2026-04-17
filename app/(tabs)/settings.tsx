@@ -18,13 +18,14 @@ import { useTheme } from "@/hooks/use-theme";
 import { ThemeButton } from "../../components/theme-button";
 
 const DIGITRANSIT_KEY = "DIGITRANSIT_API_KEY";
+const THEME_KEY = "app_theme";
 
 export default function TabTwoScreen() {
   const safeAreaInsets = useSafeAreaInsets();
   const theme = useTheme();
 
   const [apiKey, setApiKey] = useState("");
-  const [selectedTheme, setSelectedTheme] = useState<string>("");
+  const [selectedTheme, setSelectedTheme] = useState<string>();
 
   const insets = {
     ...safeAreaInsets,
@@ -48,12 +49,17 @@ export default function TabTwoScreen() {
     (async () => {
       const saved = await AsyncStorage.getItem(DIGITRANSIT_KEY);
       if (saved) setApiKey(saved);
+
+      const saved_theme = await AsyncStorage.getItem(THEME_KEY);
+      if (saved_theme) setSelectedTheme(saved_theme);
     })();
   }, []);
 
   const saveKey = async () => {
     await AsyncStorage.setItem(DIGITRANSIT_KEY, apiKey);
   };
+
+  if (selectedTheme === null) return;
 
   return (
     <ScrollView
@@ -74,7 +80,8 @@ export default function TabTwoScreen() {
               text={"System Default"}
               theme={theme}
               styles={styles}
-              selectedTheme={selectedTheme}
+              selectedTheme={selectedTheme ?? ""}
+              setSelectedTheme={setSelectedTheme}
             />
             <ThemedView style={styles.sectionsWrapper}></ThemedView>
             <ThemeButton
@@ -82,7 +89,8 @@ export default function TabTwoScreen() {
               text={"Dark"}
               theme={theme}
               styles={styles}
-              selectedTheme={selectedTheme}
+              selectedTheme={selectedTheme ?? ""}
+              setSelectedTheme={setSelectedTheme}
             />
             <ThemedView style={styles.sectionsWrapper}></ThemedView>
             <ThemeButton
@@ -90,7 +98,8 @@ export default function TabTwoScreen() {
               text={"Light"}
               theme={theme}
               styles={styles}
-              selectedTheme={selectedTheme}
+              selectedTheme={selectedTheme ?? ""}
+              setSelectedTheme={setSelectedTheme}
             />
           </ThemedView>
 
