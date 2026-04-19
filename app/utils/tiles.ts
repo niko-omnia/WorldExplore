@@ -3,6 +3,14 @@ import { latLngToTile, tileToBounds } from "./getGrid";
 
 import { saveTilesToStorage } from "./tileStorage";
 
+const defaultColor = "#00000010";
+const defaultFillColor = "#fff";
+const defaultOpacity = 0;
+
+const capturedColor = "#00c853";
+const capturedFillColor = "#00c853";
+const capturedOpacity = 0.3;
+
 export function getVisibleTiles(bounds: any, tiles: any) {
     const shapes: any[] = [];
 
@@ -18,9 +26,9 @@ export function getVisibleTiles(bounds: any, tiles: any) {
             shapes.push({
                 id,
                 shapeType: MapShapeType.RECTANGLE,
-                color: isCaptured ? "#00c853" : "#999",
-                fillColor: isCaptured ? "#00c853" : "#999",
-                fillOpacity: isCaptured ? 0.3 : 0.1,
+                color: isCaptured ? capturedColor : defaultColor,
+                fillColor: isCaptured ? capturedFillColor : defaultFillColor,
+                fillOpacity: isCaptured ? capturedOpacity : defaultOpacity,
                 bounds: tileToBounds(x, y),
             } as MapShape);
         }
@@ -34,16 +42,17 @@ export function captureTile(
     lng: number,
     setTiles: any,
     saveTimeout: any,
-    setRenderShapes: any
+    setRenderShapes: any,
+    byClick?: boolean
 ) {
     const { x, y } = latLngToTile(lat, lng);
     const id = `${x}_${y}`;
 
     setTiles((prev: any) => {
-        if (prev.get(id) === 1) return prev;
+        if (prev.get(id) === 1 && !byClick) return prev;
 
-        const next = new Map(prev);
-        next.set(id, 1);
+        const next: any = new Map(prev);
+        next.set(id, byClick ? prev.get(id) === 1 ? null : 1 : 1);
 
         // save async
         clearTimeout(saveTimeout.current);

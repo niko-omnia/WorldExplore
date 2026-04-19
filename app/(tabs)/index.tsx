@@ -169,7 +169,8 @@ const App: React.FC = () => {
             payload.touchLatLng.lng,
             setTiles,
             saveTimeout,
-            setRenderShapes
+            setRenderShapes,
+            true
           );
 
           if (payload.bounds) {
