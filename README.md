@@ -4,7 +4,7 @@ Needs a lot of improvements.
 If using digitransit map layer, only Finland & Estonia are supported.
 
 <p float="left">
-  <img src="https://github.com/user-attachments/assets/9948c14c-f44e-4850-bcfe-e9142e329dce" width="250"/>
-  <img src="https://github.com/user-attachments/assets/817cb712-6bd3-460d-b338-721122e52b6d" width="250"/>
-  <img src="https://github.com/user-attachments/assets/5d19cbe5-0148-430b-bc22-89a1804acc65" width="250"/>
+  <img width="250" alt="map" src="https://github.com/user-attachments/assets/ccd50db2-a8ad-4486-8ddf-786d731956f5" />
+  <img width="250" alt="map_grid" src="https://github.com/user-attachments/assets/0fd9ecdd-0e12-4857-bbe7-110c4508ea53" />
+  <img width="250" alt="settings" src="https://github.com/user-attachments/assets/0aefb319-16a1-4944-9481-3d349b4988d7" />
 </p>
